@@ -14,18 +14,24 @@ import {
 
 export class App extends React.Component {
   state = {
-    contacts: [
-      { id: nanoid(), name: 'Rosie Simpson', number: '(459)845-1256' },
-      { id: nanoid(), name: 'Hermione Kline', number: '(443)345-8912' },
-      { id: nanoid(), name: 'Eden Clements', number: '(645)989-1779' },
-      { id: nanoid(), name: 'Annie Copeland', number: '(227)047-9126' },
-    ],
+    contacts: [],
     filter: '',
   };
 
+  componentDidMount() {
+    let storedContacts = [];
+    storedContacts = localStorage.getItem('contactList');
+    this.setState({ contacts: JSON.parse(storedContacts) });
+  }
+
+  componentDidUpdate() {
+    const { contacts } = this.state;
+    localStorage.setItem('contactList', JSON.stringify(contacts));
+  }
+
   updateContactList = (name, number) => {
     this.setState(prevState => ({
-      contacts: [...prevState.contacts, { name, number, id: nanoid() }],
+      contacts: [...prevState.contacts, { id: nanoid(), name, number }],
     }));
   };
 

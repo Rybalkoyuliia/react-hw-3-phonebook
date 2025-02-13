@@ -3,7 +3,7 @@ import React from 'react';
 
 export class SearchField extends React.Component {
   handleChange = e => {
-    const filter = e.target.value;
+    const filter = e.target.value.trim();
     this.props.setFilter(filter);
   };
 
