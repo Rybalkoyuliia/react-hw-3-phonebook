@@ -21,7 +21,7 @@ export class App extends React.Component {
   componentDidMount() {
     let storedContacts = [];
     storedContacts = localStorage.getItem('contactList');
-    this.setState({ contacts: JSON.parse(storedContacts) });
+    this.setState({ contacts: JSON.parse(storedContacts) || [] });
   }
 
   componentDidUpdate() {

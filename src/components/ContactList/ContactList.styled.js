@@ -63,3 +63,9 @@ export const StyledButton = styled.button`
     border: 2px solid orange;
   }
 `;
+
+export const StyledEmptyIdentificatorMessage = styled.p`
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+`;

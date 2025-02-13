@@ -17,8 +17,9 @@ export class ContactForm extends React.Component {
     const form = e.currentTarget;
     const addedName = form.elements.name.value;
     const addedPhone = form.elements.number.value;
+    const currentContacts = contactList || [];
 
-    const exisingContact = contactList.some(
+    const exisingContact = currentContacts.some(
       contact => contact.name === addedName
     );
     if (exisingContact) {
@@ -26,12 +27,12 @@ export class ContactForm extends React.Component {
       return;
     }
 
-    const existingPhoneNumber = contactList.some(
+    const existingPhoneNumber = currentContacts.some(
       contact => contact.number === addedPhone
     );
 
     if (existingPhoneNumber) {
-      const existingContact = contactList.find(
+      const existingContact = currentContacts.find(
         contact => contact.number === addedPhone
       );
 

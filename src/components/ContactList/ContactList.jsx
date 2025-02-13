@@ -5,34 +5,33 @@ import {
   StyledContactListItem,
   StyledContactName,
   StyledContactPhone,
+  StyledEmptyIdentificatorMessage,
   StyledInfoWrapper,
 } from './ContactList.styled';
 
 export class ContactList extends React.Component {
-  handleDelete = id => {
-    this.props.delete(id);
-  };
-
   render = () => {
-    const { list } = this.props;
+    const { list, delete: deleteContact } = this.props;
 
     return (
       <StyledContactList>
-        {list.map(item => (
-          <StyledContactListItem key={item.id}>
-            <StyledInfoWrapper>
-              <StyledContactName> {item.name}</StyledContactName>
-              <StyledContactPhone> {item.number}</StyledContactPhone>
-            </StyledInfoWrapper>
-            <StyledButton
-              onClick={() => {
-                this.handleDelete(item.id);
-              }}
-            >
-              Delete
-            </StyledButton>
-          </StyledContactListItem>
-        ))}
+        {!list?.length ? (
+          <StyledEmptyIdentificatorMessage>
+            Currently, no contacts in your list
+          </StyledEmptyIdentificatorMessage>
+        ) : (
+          list.map(item => (
+            <StyledContactListItem key={item.id}>
+              <StyledInfoWrapper>
+                <StyledContactName> {item.name}</StyledContactName>
+                <StyledContactPhone> {item.number}</StyledContactPhone>
+              </StyledInfoWrapper>
+              <StyledButton onClick={() => deleteContact(item.id)}>
+                Delete
+              </StyledButton>
+            </StyledContactListItem>
+          ))
+        )}
       </StyledContactList>
     );
   };
